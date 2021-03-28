@@ -15,4 +15,15 @@ public class HelloServiceImpl implements HelloService {
         return helloRepository.get();
     }
 
+  @Override
+  public String getName() {
+    return helloRepository.getName();
+  }
+
+  @Override
+  public String getNameCity() {
+    return helloRepository.getNameCity();
+  }
+
+
 }

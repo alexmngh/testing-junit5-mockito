@@ -1,5 +1,6 @@
 package com.mkyong.core.services;
 
+import com.mkyong.core.client.ReceiveClient;
 import com.mkyong.core.repository.HelloRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +19,12 @@ public class HelloServiceMockTest {
     @Mock
     private HelloRepository helloRepository;
 
-    //@Spy
+  @Mock
+  private ReceiveClient receiveClient;
+
+
+
+  //@Spy
     @InjectMocks // auto inject helloRepository
     private HelloService helloService = new HelloServiceImpl();
 
@@ -26,6 +32,10 @@ public class HelloServiceMockTest {
     void setMockOutput() {
         //when(helloService.get()).thenReturn("Hello Mockito");
         when(helloRepository.get()).thenReturn("Hello Mockito From Responsitory");
+        when(helloRepository.getName()).thenReturn("Name Bars");
+        when(helloRepository.getNameCity()).thenReturn("Bern Alfa Jack");
+        when(helloRepository.getCat()).thenReturn("Alfa");
+        when(receiveClient.getMaster()).thenReturn(" Jack");
     }
 
     @DisplayName("Test Mock helloService + helloRepository")
@@ -33,5 +43,17 @@ public class HelloServiceMockTest {
     void testGet() {
         assertEquals("Hello Mockito From Responsitory", helloService.get());
     }
+
+  @DisplayName("My Get Bars")
+  @Test
+  void testGetName() {
+    assertEquals("Name Bars", helloService.getName());
+  }
+
+  @DisplayName("My Get Name")
+  @Test
+  void testGetNameCity() {
+    assertEquals("Bern Alfa Jack", helloService.getNameCity());
+  }
 
 }
